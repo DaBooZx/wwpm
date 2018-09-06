@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <style>
+        @-webkit-keyframes outerRotate1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @-moz-keyframes outerRotate1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @-o-keyframes outerRotate1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes outerRotate1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes outerRotate2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+
+        @-moz-keyframes outerRotate2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+
+        @-o-keyframes outerRotate2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+
+        @keyframes outerRotate2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg);
+            }
+        }
+
+        @-webkit-keyframes textColour {
+            0% {
+                color: #fff;
+            }
+            100% {
+                color: #3BB2D0;
+            }
+        }
+
+        @-moz-keyframes textColour {
+            0% {
+                color: #fff;
+            }
+            100% {
+                color: #3BB2D0;
+            }
+        }
+
+        @-o-keyframes textColour {
+            0% {
+                color: #fff;
+            }
+            100% {
+                color: #3BB2D0;
+            }
+        }
+
+        @keyframes textColour {
+            0% {
+                color: #fff;
+            }
+            100% {
+                color: #3BB2D0;
+            }
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Open Sans", sans-serif;
+            width: 100vw;
+            height: 100vh;
+            background: #222;
+        }
+
+        .e-loadholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            width: 240px;
+            height: 240px;
+            border: 5px solid #1B5F70;
+            border-radius: 120px;
+            box-sizing: border-box;
+        }
+
+        .e-loadholder:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            content: " ";
+            display: block;
+            background: #222;
+            transform-origin: center;
+            z-index: 0;
+        }
+
+        .e-loadholder:after {
+            width: 100px;
+            height: 200%;
+            -webkit-animation: outerRotate2 30s infinite linear;
+            -moz-animation: outerRotate2 30s infinite linear;
+            -o-animation: outerRotate2 30s infinite linear;
+            animation: outerRotate2 30s infinite linear;
+        }
+
+        .e-loadholder .m-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            width: 200px;
+            height: 200px;
+            color: #888;
+            text-align: center;
+            border: 5px solid #2a93ae;
+            border-radius: 100px;
+            box-sizing: border-box;
+            z-index: 20;
+            text-transform: uppercase;
+        }
+
+        .e-loadholder .m-loader:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            content: " ";
+            display: block;
+            background: #222;
+            transform-origin: center;
+            z-index: -1;
+        }
+
+        .e-loadholder .m-loader:after {
+            width: 100px;
+            height: 106%;
+            -webkit-animation: outerRotate1 15s infinite linear;
+            -moz-animation: outerRotate1 15s infinite linear;
+            -o-animation: outerRotate1 15s infinite linear;
+            animation: outerRotate1 15s infinite linear;
+        }
+
+        .e-loadholder .m-loader .e-text {
+            font-size: 14px;
+            font-size: 1.4rem;
+            line-height: 130px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            -webkit-animation: textColour 1s alternate linear infinite;
+            -moz-animation: textColour 1s alternate linear infinite;
+            -o-animation: textColour 1s alternate linear infinite;
+            animation: textColour 1s alternate linear infinite;
+            display: block;
+            width: 140px;
+            height: 140px;
+            text-align: center;
+            border: 5px solid #3bb2d0;
+            border-radius: 70px;
+            box-sizing: border-box;
+            z-index: 20;
+        }
+
+        .e-loadholder .m-loader .e-text:before,
+        .e-loadholder .m-loader .e-text:after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            content: " ";
+            display: block;
+            background: #222;
+            transform-origin: center;
+            z-index: -1;
+        }
+
+        .e-loadholder .m-loader .e-text:before {
+            width: 110%;
+            height: 40px;
+            -webkit-animation: outerRotate2 3.5s infinite linear;
+            -moz-animation: outerRotate2 3.5s infinite linear;
+            -o-animation: outerRotate2 3.5s infinite linear;
+            animation: outerRotate2 3.5s infinite linear;
+        }
+
+        .e-loadholder .m-loader .e-text:after {
+            width: 40px;
+            height: 110%;
+            -webkit-animation: outerRotate1 8s infinite linear;
+            -moz-animation: outerRotate1 8s infinite linear;
+            -o-animation: outerRotate1 8s infinite linear;
+            animation: outerRotate1 8s infinite linear;
+        }
+
+        #particleCanvas-White {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            width: 100%;
+            height: 50%;
+            opacity: 0.1;
+        }
+
+        #particleCanvas-Blue {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-51%, -50%);
+            -moz-transform: translate(-51%, -50%);
+            -ms-transform: translate(-51%, -50%);
+            -o-transform: translate(-51%, -50%);
+            transform: translate(-51%, -50%);
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="e-loadholder">
+        <div class="m-loader">
+            <span class="e-text">Loading</span>
+        </div>
+    </div>
+    <div id="particleCanvas-Blue"></div>
+    <div id="particleCanvas-White"></div>
+</body>
+<!-- Core plugin JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
+<script src="../firebase/init.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script>
+
+    initApp = () => {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                if (!user.emailVerified) {
+                    sendEmailVerification();
+                } else {
+                    window.location.replace("/dashboard");
+                }
+            } else {
+                console.log("Anomous");
+                window.location.replace("/auth/login.html");
+            }
+        });
+    };
+
+    window.onload = () => initApp();
+</script>
+
+</html>
