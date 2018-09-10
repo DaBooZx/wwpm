@@ -124,6 +124,16 @@
         });
     };
 
+    sendEmailVerification = () => {
+      // [START sendemailverification]
+      firebase
+        .auth()
+        .currentUser.sendEmailVerification()
+        .then(() => {
+          alert("Email Verification Sent!");
+        });
+    };
+
     initApp = () => {
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
@@ -138,7 +148,7 @@
         }
       });
     };
-    
+
     window.onload = () => initApp();
   </script>
 
