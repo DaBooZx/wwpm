@@ -88,6 +88,7 @@
     handleSignUp = () => {
       var email = $("#inputEmail").val();
       var password = $("#inputPassword").val();
+      var confirmPassword = $("#confirmPassword").val();
       
 
 
@@ -122,6 +123,23 @@
           console.log(error);
         });
     };
+
+    initApp = () => {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          if (!user.emailVerified) {
+            sendEmailVerification();
+          } else {
+            window.location.replace("../dashboard");
+          }
+        } else {
+          console.log("Anomous");
+          //window.location.replace("/login.html");
+        }
+      });
+    };
+    
+    window.onload = () => initApp();
   </script>
 
 </body>

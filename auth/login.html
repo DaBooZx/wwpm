@@ -123,6 +123,7 @@
         if (user) {
           if (!user.emailVerified) {
             sendEmailVerification();
+            window.location.replace("confirm-email.html");
           } else {
             window.location.replace("../dashboard");
           }
