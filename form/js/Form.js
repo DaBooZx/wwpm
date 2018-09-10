@@ -210,7 +210,7 @@ function writeNewPost() {
 }
 
 function theJson(e) {
-    $("#listt,#text,#newbtn,#bckbtn").toggle()
+    $("#listt,#text").toggle()
     var id = $(e).attr('data-set');
     console.log(id);
 
@@ -227,7 +227,7 @@ function theJson(e) {
                 <div class="panel panel-default"  >
                     <div class="panel-heading">
                         <!--<a href="#"  data-toggle="collapse" data-target="#pannel_${(el.id)}" >${(el.id + 1)}. ${el.head}</a> -->
-                        <p style="color:#fff">${(el.id + 1)}. ${el.head} 
+                        <p style="color:#333">${(el.id + 1)}. ${el.head} 
                             <button class="btn btn-Secondary pull-right" data-toggle="collapse" data-target="#pannel_${(el.id)}"> 
                                 <i class="fas fa-angle-double-down"></i>
                             </button>

@@ -7,7 +7,7 @@ initApp = () => firebase.auth().onAuthStateChanged(user => {
     // console.log('==================auth==================');
     // console.log(user);
     // console.log('====================================');
-    if (!user) return window.location.replace("../auth/login.html")
+    if (!user) return window.location.replace("../../auth/login.html")
  });
 
  loadUI = (url,tagId) =>{
