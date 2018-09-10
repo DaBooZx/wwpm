@@ -30,9 +30,9 @@ initApp = () => firebase.auth().onAuthStateChanged(user => {
 
 
 window.onload = () => {
-    loadUI('../layout/nav.html','nav-top');
-    loadUI('../layout/menu.html','nav-menu');
-    loadUI('../layout/footer.html','footer');
-    loadUI('../layout/modal.html','ex-event');
+    loadUI('../../layout/nav.html','nav-top');
+    loadUI('../../layout/menu.html','nav-menu');
+    loadUI('../../layout/footer.html','footer');
+    loadUI('../../layout/modal.html','ex-event');
     initApp();
 }
