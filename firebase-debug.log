@@ -1,0 +1,32 @@
+[debug] [2018-09-10T07:40:44.873Z] ----------------------------------------------------------------------
+[debug] [2018-09-10T07:40:44.878Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Support\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-10T07:40:44.879Z] CLI Version:   4.2.1
+[debug] [2018-09-10T07:40:44.879Z] Platform:      win32
+[debug] [2018-09-10T07:40:44.879Z] Node Version:  v10.9.0
+[debug] [2018-09-10T07:40:44.883Z] Time:          Mon Sep 10 2018 14:40:44 GMT+0700 (Indochina Time)
+[debug] [2018-09-10T07:40:44.883Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-10T07:40:44.914Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-10T07:40:44.916Z] > authorizing via signed-in user
+[debug] [2018-09-10T07:40:44.921Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ww-pm-master  
+ 
+[debug] [2018-09-10T07:40:46.319Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-10T07:40:46.321Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ww-pm-master  
+ 
+[debug] [2018-09-10T07:40:47.819Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Support\Desktop\Work\WW-PM-Master'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-09-10T07:40:50.400Z] Fetching environment
+[debug] [2018-09-10T07:40:50.405Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/44764237218:getServerAppConfig  
+ 
+[debug] [2018-09-10T07:40:50.406Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/44764237218/clients/_:getWebAppConfig  
+ 
+[debug] [2018-09-10T07:40:50.887Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-10T07:40:50.889Z] Starting @google-cloud/functions-emulator
+[debug] [2018-09-10T07:40:50.943Z] <<< HTTP RESPONSE 200
+[info] i  hosting[ww-pm-master]: Serving hosting files from: public
+[info] +  hosting[ww-pm-master]: Local server: http://localhost:5000
+[debug] [2018-09-10T07:40:55.658Z] Parsing function triggers
+[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.
