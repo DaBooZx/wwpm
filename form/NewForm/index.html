@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
     <link href="../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../../vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <link href="../../css/sb-admin.css" rel="stylesheet">
-    <script src="../Form.js"></script>
+
 
 </head>
 
@@ -36,73 +36,8 @@
                     <li class="breadcrumb-item active">New Form</li>
                 </ol>
                 <!-- /////////////////[card red green blue yellow]////////////////// -->
-                <div class="row">
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-primary o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-comments"></i>
-                                </div>
-                                <div class="mr-5">26 New Alert!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-warning o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-list"></i>
-                                </div>
-                                <div class="mr-5">11 New Tasks!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-success o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-shopping-cart"></i>
-                                </div>
-                                <div class="mr-5">123 New Orders!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-danger o-hidden h-100">
-                            <div class="card-body">
-                                <div class="card-body-icon">
-                                    <i class="fas fa-fw fa-life-ring"></i>
-                                </div>
-                                <div class="mr-5">13 New Tickets!</div>
-                            </div>
-                            <a class="card-footer text-white clearfix small z-1" href="#">
-                                <span class="float-left">View Details</span>
-                                <span class="float-right">
-                                    <i class="fas fa-angle-right"></i>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-<!-- /////////////////////////////////[Code]/////////////////////////////////// -->
+
+                <!-- /////////////////////////////////[Code]/////////////////////////////////// -->
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-table"></i> New Form
@@ -116,7 +51,7 @@
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text form-control">Form Name</div>
                                             </div>
-                                            <input type="text" class="form-control" id="FormInputt" placeholder="PM Form v0.0"><br/>
+                                            <input type="text" class="form-control" id="FormInputt" placeholder="PM Form v0.0"><br />
                                             <div class="input-group-prepend">
                                                 <div class="input-group-text form-control">Appover</div>
                                             </div>
@@ -134,26 +69,27 @@
                                                 <div class="container">
                                                     <input type="text" name="text1" id="text1">
                                                     <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                
                                                     <button type="button" class="btn btn-success" id="json">Json</button>
-                
+
                                                     <div id="value"></div>
                                                 </div>
                                                 <!-- form -->
                                             </div>
                                         </div>
                                     </div>
-                
-                
+
+
                                 </div>
                                 <div class="footer-newform">
                                     <button type="button" class="btn btn-success" id="FormSumit" onclick="writeNewPost()">Submit</button>
                                 </div>
+                                <div id="table"></div>
+                                <p id="export"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-<!-- /////////////////////////////////[Code]//////////////////////////////////// -->
+                <!-- /////////////////////////////////[Code]//////////////////////////////////// -->
             </div>
             <!-- /.container-fluid -->
 
@@ -165,6 +101,131 @@
 
     </div>
     <!-- /#wrapper -->
+
+
+    <script type="text/javascript">
+        var result = [];
+
+        function readSingleFile(evt) {
+            var f = evt.target.files[0];
+
+            if (f) {
+                var r = new FileReader();
+                r.onload = function (e) {
+                    var csv = e.target.result;
+                    // console.log(csv);
+                    // var row = contents.split("\r\n");
+                    var lines = csv.split("\r\n");
+                    var headers = lines[2].split(",");
+
+                    for (var i = 4; i < lines.length; i++) {
+
+                        var obj = {};
+                        var currentline = lines[i - 1].split(",");
+
+                        for (var j = 0; j < headers.length; j++) {
+                            obj[headers[j]] = currentline[j];
+                        }
+
+                        result.push(obj);
+
+                    }
+                    // EXTRACT VALUE FOR HTML HEADER. 
+                    var col = [];
+                    for (var i = 0; i < result.length; i++) {
+                        for (var key in result[i]) {
+                            if (col.indexOf(key) === -1) {
+                                col.push(key);
+                            }
+                        }
+                    }
+
+                    // CREATE DYNAMIC TABLE.
+                    var table = document.createElement("table");
+                    table.setAttribute("class", "table table-bordered table-responsive-md table-striped text-center");
+                    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+                    var tr = table.insertRow(-1);                   // TABLE ROW.
+
+                    for (var i = 0; i < col.length; i++) {
+                        var th = document.createElement("th");
+                        th.setAttribute("class", "text-center");    // TABLE HEADER.
+                        th.innerHTML = col[i];
+                        tr.appendChild(th);
+                    }
+
+                    // ADD JSON DATA TO THE TABLE AS ROWS.
+                    for (var i = 0; i < result.length; i++) {
+
+                        tr = table.insertRow(-1);
+
+                        for (var j = 0; j < col.length; j++) {
+                            var tabCell = tr.insertCell(-1);
+                            tabCell.setAttribute("contenteditable", "true")
+                            tabCell.innerHTML = result[i][col[j]];
+
+                        }
+                    }
+
+                    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+                    var divContainer = document.getElementById("table");
+                    divContainer.innerHTML = "";
+                    divContainer.appendChild(table);
+
+                    var $TABLE = $('#table');
+                    var $BTN = $('#FormSumit');
+                    var $EXPORT = $('#export');
+
+                    jQuery.fn.pop = [].pop;
+                    jQuery.fn.shift = [].shift;
+
+                    $BTN.click(function () {
+                        var $rows = $TABLE.find('tr:not(:hidden)');
+                        var headers = [];
+                        var data = [];
+
+                        // Get the headers (add special header logic here)
+                        $($rows.shift()).find('th:not(:empty)').each(function () {
+                            headers.push($(this).text());
+                        });
+
+                        // Turn all existing rows into a loopable array
+                        $rows.each(function () {
+                            var $td = $(this).find('td');
+                            var h = {};
+
+                            // Use the headers from earlier to name our hash keys
+                            headers.forEach(function (header, i) {
+                                h[header] = $td.eq(i).text();
+                            });
+
+                            data.push(h);
+                        });
+            
+                        // Output the result
+                        $EXPORT.text(JSON.stringify(data));
+                        var fair = JSON.stringify(data);
+                        console.log(fair);
+                        firebase.database().ref('PM-Form').push({
+                            json: fair,
+                            name: $('#FormInputt').val(),
+                            number: $('#vVersionn').val()
+                        })
+                        console.log(arr)
+                    });
+
+                }
+                r.readAsText(f);
+            } else {
+                alert("Failed to load file");
+            }
+        }
+
+        document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+
+    </script>
+
+
 
     <div id="ex-event" />
 

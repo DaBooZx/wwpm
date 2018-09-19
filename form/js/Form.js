@@ -1,9 +1,9 @@
 var arr = [];
-
 function loadMessages() {
-    console.log("data")
+    console.log("loadMessages")
     // Loads the last 12 messages and listen for new ones.
     var callback = function (snap) {
+
         var data = snap.val();
         // console.log(data);
         var div = $(`#${snap.key}`);
@@ -27,28 +27,19 @@ function loadMessages() {
                 </div>
                 `)
             console.log(data);
-
         }
-        $("#modelId").modal('hide');
     };
-    var fang = function (oat) {
-        console.log(oat.key);
-    }
+
     firebase
         .database()
         .ref("/PM-Form/")
         .limitToLast(12)
         .on("child_added", callback);
 
-    firebase
-        .database()
-        .ref("/csv/")
-        .limitToLast(12)
-        .on("child_added", callback);
-
 }
 
 function addSub(id) {
+    console.log("addSub")
     console.log('====================================');
     console.log(id);
     console.log(arr[id]);
@@ -70,16 +61,20 @@ function valueChange(e) {
     var subId = $(e).attr('data-sub');
     var type = $(e).attr('data-type');
     arr[headId].sub[subId][type] = $(e).val();
+    var textss = arr[headId].sub[subId][type];
 
     console.log('====================================');
-    console.log(arr);
+    console.log(textss);
     console.log('====================================');
+
 }
 
 
 function render(id) {
     var subtext = "";
     var index = 0;
+    console.log(id);
+    console.log("render");
     console.log('====================================');
     console.log(arr[id]);
     console.log(arr[id].sub);
@@ -132,6 +127,7 @@ function render(id) {
 
 function removeSub(head, id) {
     console.log('=============remove=================');
+    console.log("removeSub");
     console.log(id);
     console.log(arr[head]);
     console.log(arr[head].sub[id]);
@@ -144,23 +140,19 @@ function removeSub(head, id) {
 
 
 $(document).ready(function () {
-
-
     $("#json").click(() => {
-        console.log('====================================');
         console.log(JSON.stringify(arr));
-        console.log('====================================');
     })
-
     $("#submit").click(function () {
         var texts = $("#text1").val()
-        arr.push({
-            id: arr.length,
-            head: texts,
-            sub: []
-        })
-        console.log(arr);
-
+        
+            arr.push({
+                id: arr.length,
+                head: texts,
+                sub: []
+            })
+            console.log(arr);
+        
         $("#value").html("")
 
         arr.forEach((el, index) => {
@@ -171,11 +163,15 @@ $(document).ready(function () {
                 <div class="panel-heading">
                     <!--<a href="#"  data-toggle="collapse" data-target="#pannel_${(el.id)}" >${(el.id + 1)}. ${el.head}</a> -->
                     <p style="color:#333">${(el.id + 1)}. ${el.head} 
-                        <button class="btn btn-Secondary pull-right" data-toggle="collapse" data-target="#pannel_${(el.id)}"> 
+                        <button type="button" class="btn btn-danger btn-xs float-right" onclick="cleanSub(${index})" >
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <button type="button" class="btn btn-info float-right btn-xs" style="margin:0px 10px" onclick="addSub(${el.id})" >
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button class="btn btn-Secondary float-right" data-toggle="collapse" style="margin:0px 50px" data-target="#pannel_${(el.id)}"> 
                             <i class="fas fa-angle-double-down"></i>
                         </button>
-                        <button type="button" class="btn btn-info pull-right btn-xs" onclick="addSub(${el.id})" >+</button>
-                        <button type="button" class="btn btn-danger btn-xs" onclick="cleanSub(${index})" >-</button>
                         </p>
                 </div>
                 <div class="panel-body collapse" id="pannel_${el.id}" > ไม่พบข้อมูล... </div>
@@ -189,24 +185,28 @@ $(document).ready(function () {
 });
 
 function cleanSub(id) {
-
-    console.log('=============remove=================');
-    console.log('===');
+    console.log("cleanSub");
     console.log(id);
-    console.log('===');
-    console.log('=============remove=================');
     arr.splice(id, 1)
     $(`#head_${id}`).remove();
+    // arr[id].sub.sort()
 }
 
 function writeNewPost() {
     console.log(arr);
+    var namee =$('#FormInputt').val();
+    var numberr =$('#vVersionn').val();
+    if(namee == ""){
+        alert("please enter word in Form-name"); 
+    } else if(numberr == ""){
+        alert("please enter word in Form-number"); 
+    }else{
     firebase.database().ref('PM-Form').push({
         json: JSON.stringify(arr),
-        name: $('#FormInputt').val(),
-        number: $('#vVersionn').val()
+        name: namee,
+        number: numberr
     })
-    console.log(arr)
+    console.log(arr)}
 }
 
 function theJson(e) {
@@ -219,7 +219,7 @@ function theJson(e) {
         var useJson = snapshot.val().json;
         var obj = JSON.parse(useJson);
         $("#listt").html("")
-        
+
         var subtext = "";
         obj.forEach((el, i) => {
             subtext += `
@@ -241,11 +241,12 @@ function theJson(e) {
         })
         $("#listt").html(subtext)
     });
+
 }
 
 function renderSubs(subs) {
     var str = "";
-    subs.forEach((subs,index) => {
+    subs.forEach((subs, index) => {
         console.log(subs);
         console.log(subs.value);
         str += `
