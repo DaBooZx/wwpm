@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <button type="button" class="btn btn-success" id="addH">+head</button>
+        <button type="button" class="btn btn-danger" id="delH">-head</button>
+        <div id="sub"></div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
+        crossorigin="anonymous"></script>
+    <script>
+        var arr = [];
+        $(document).ready(function () {
+            $("#addH").click(function addHead() {
+                console.log("fn.addHead");
+                var id = arr.length
+                arr.push({
+                    index: id,
+                    arrSub: []
+                });
+                console.log("arr = ", arr);
+                var subBox = "";
+                arr.forEach((sub, index) => {
+                    subBox += `
+                        <div id="subH_${index}" >
+                         <div class="row">
+                          <p class="col-sm-6">${(index + 1)}</p> 
+                          <button type="button" addSub="true" 
+                          class="btn btn-info float-right col-sm-6">addSub</button>
+                         </div>
+                         <div id="pannel_${(index)}"></div>
+                        </div>
+                    `
+                })
+
+                $("#sub").html(subBox);
+                $(`[addSub="true"]`).click(function () { subData(id) })
+
+            });
+            function subData(id) {
+                console.log("fn.sub");
+
+                console.log("arr.length =", id);
+                console.log(arr[id]);
+                var subId = arr[id].arrSub;
+                subId.push({
+                    data1: '',
+                    data2: ''
+                })
+                var subdata = "";
+                subId.sort();
+                subId.forEach((data, i) => {
+                    subdata += `
+                    <div class="row" id="sub_${id}${i}">
+                        <div class="col-sm-6">
+                        <input type="text" placeholder="data1"  class="form-control" id="subV_${id}${i}"
+                        sub-d1="${id}" sub-b1="${i}" sub-t1="value"  value="${data.data1}">
+                        </div>
+                        <div class="col-sm-6">
+                        <input type="text" placeholder="data2"  class="form-control" id="subC_${id}${i}"
+                        sub-d2="${id}" sub-b2="${i}" sub-t2="check"  value="${data.data2}">
+                        </div>
+                    </div>`
+                })
+                console.log(" =");
+                $(`#pannel_${id}`).html(subdata);
+
+            }
+
+        });
+
+
+    </script>
+
+
+
+</body>
+
+</html>
+
+<!-- <input type="text" class="form-control" id="sub1_${(index + 1)}" placeholder="sub1">
+<input type="text" class="form-control" id="sub2_${(index + 1)}" placeholder="sub2">
+<input type="text" class="form-control" id="sub3_${(index + 1)}" placeholder="sub3">
+<input type="text" class="form-control" id="sub4_${(index + 1)}" placeholder="sub4"> -->

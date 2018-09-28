@@ -35,7 +35,6 @@ function loadMessages() {
         .ref("/PM-Form/")
         .limitToLast(12)
         .on("child_added", callback);
-
 }
 
 function addSub(id) {

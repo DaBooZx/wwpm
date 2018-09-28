@@ -2,7 +2,7 @@ var arr = [];
 $(document).ready(function () {
 
     $("#submit").click(function () { headset(this) });
-    $("#sent").click(function () { sentData(this) });
+    
 })
 
 function removesub(e) {
@@ -89,7 +89,7 @@ function subset(e, n) {
         })
     }
     // console.log(arr);
-    // console.log(arr[ID].sub);
+    // console.log(ID);
     var subtext = "";
     arr[ID].sub.sort()
     arr[ID].sub.forEach((subs, indexx) => {
@@ -151,10 +151,11 @@ function valueChange(e) {
     var subId = $(e).attr('data-sub');
     var type = $(e).attr('data-type');
     arr[headId].sub[subId][type] = $(e).val();
-
+    
     console.log('====================================');
     console.log(arr);
     console.log('====================================');
+    console.log(arr[headId].sub[subId][type]);
 }
 
 $(document).ready(function () {
