@@ -3,7 +3,11 @@
 
 SignOut = () => { if (firebase.auth().currentUser) { firebase.auth().signOut() } }
 
+<<<<<<< HEAD
 initApp = () => firebase.auth().onAuthStateChanged(user => { 
+=======
+initApp = () => firebase.auth().onAuthStateChanged(user => {
+>>>>>>> bf3b851038a20432d881063ef7b8ab92745990d0
     if (!user) return window.location.replace("../../auth/login.html")
  });
 
@@ -18,8 +22,14 @@ initApp = () => firebase.auth().onAuthStateChanged(user => {
  }
 
  menuActive = () =>{
+<<<<<<< HEAD
     var pathname = window.location.pathname.split("/");
     $("#menu-"+pathname[1]).addClass("active")
+=======
+     var a = window.location.pathname.split("/");
+     var path = a[1];
+    $("#menu-"+path).addClass("active");
+>>>>>>> bf3b851038a20432d881063ef7b8ab92745990d0
  }
 
 
