@@ -135,7 +135,7 @@ function writeNewPost() {
             appover: Appover,
             json: jArr
         })
-        //console.log(arr)
+        console.log(arr)
     }
 }
 
