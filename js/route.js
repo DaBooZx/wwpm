@@ -4,9 +4,6 @@
 SignOut = () => { if (firebase.auth().currentUser) { firebase.auth().signOut() } }
 
 initApp = () => firebase.auth().onAuthStateChanged(user => { 
-    // console.log('==================auth==================');
-    // console.log(user);
-    // console.log('====================================');
     if (!user) return window.location.replace("../../auth/login.html")
  });
 
@@ -21,11 +18,8 @@ initApp = () => firebase.auth().onAuthStateChanged(user => {
  }
 
  menuActive = () =>{
-    var pathname = window.location.pathname.replace(/\//gi,"");
-    // console.log('====================================');
-    // console.log(pathname);
-    // console.log('====================================');
-    $("#menu-"+pathname).addClass("active")
+    var pathname = window.location.pathname.split("/");
+    $("#menu-"+pathname[1]).addClass("active")
  }
 
 

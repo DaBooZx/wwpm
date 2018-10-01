@@ -29,9 +29,9 @@
 
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item">
+                    <!-- <li class="breadcrumb-item">
                         <a href="../list/">Plan List</a>
-                    </li>
+                    </li> -->
                     <li class="breadcrumb-item active">New Plan</li>
                 </ol>
 
@@ -60,23 +60,23 @@
                             <form id="PlanList" class="form-inline">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">STATION</span>
+                                        <span class="input-group-text">Plan</span>
                                     </div>
-                                    <input type="text" class="form-control" id="ProjectTitle" placeholder="Station name..">
+                                    <input type="text" class="form-control" id="ProjectTitle" placeholder="Plan name">
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">ASSET NAME</span>
+                                        <span class="input-group-text">Start</span>
                                     </div>
-                                    <input class="form-control" id="SiteId" placeholder="Asset Name..">
+                                    <input class="form-control" id="SiteId" placeholder="Start Date">
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">TASK LIST</span>
+                                        <span class="input-group-text">Expire</span>
                                     </div>
-                                    <input class="form-control" id="SiteReport" placeholder="Task List..">
+                                    <input class="form-control" id="SiteReport" placeholder="Expire Date">
                                 </div>
 
                             </form>
@@ -85,13 +85,17 @@
                                 <label class="btn btn-outline-success">Import CSV
                                     <input type="file" id="fileinput" style="display:none" />
                                 </label>
-                                <button class="float-left btn btn-outline-info" type="button" id="downloadform">
-                                    <h5 class="mb-0"><i class="fas fa-file-download"> Templete</i></h5>
-                                </button>
+                                <label class="float-left btn btn-outline-info" id="downloadform" onclick="downform()">
+                                    <i class="fas fa-file-download"> Template</i>
+                                </label>
                                 <!-- <input id="myInput" type="text" placeholder="Search.."> -->
                                 <!-- <a href="#"><i class="far fa-check-circle" id="clear-filter" data-role="fieldcontain"></i></a> -->
                                 <label id="Sub-btn" class="btn btn-outline-primary collapse" data-toggle="collapse"
                                     data-target="#collapseOne">Submit</label>
+
+                                <label id="cancelplan" data-toggle="collapse" data-target="#collapseOne" class="btn btn-outline-danger collapse">
+                                    <i class="fas fa-ban"></i> cancel</label>
+
 
                             </div>
                         </div>
@@ -109,6 +113,26 @@
                 <script type="text/javascript">
                     var result = [];
 
+                    function CSVtoArray(text) {
+                        var re_valid = /^\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*(?:,\s*(?:'[^'\\]*(?:\\[\S\s][^'\\]*)*'|"[^"\\]*(?:\\[\S\s][^"\\]*)*"|[^,'"\s\\]*(?:\s+[^,'"\s\\]+)*)\s*)*$/;
+                        var re_value = /(?!\s*$)\s*(?:'([^'\\]*(?:\\[\S\s][^'\\]*)*)'|"([^"\\]*(?:\\[\S\s][^"\\]*)*)"|([^,'"\s\\]*(?:\s+[^,'"\s\\]+)*))\s*(?:,|$)/g;
+                        // Return NULL if input string is not well formed CSV string.
+                        if (!re_valid.test(text)) return null;
+                        var a = [];                     // Initialize array to receive values.
+                        text.replace(re_value, // "Walk" the string using replace with callback.
+                            function (m0, m1, m2, m3) {
+                                // Remove backslash from \' in single quoted values.
+                                if (m1 !== undefined) a.push(m1.replace(/\\'/g, "'"));
+                                // Remove backslash from \" in double quoted values.
+                                else if (m2 !== undefined) a.push(m2.replace(/\\"/g, '"'));
+                                else if (m3 !== undefined) a.push(m3);
+                                return ''; // Return empty string.
+                            });
+                        // Handle special case of empty last value.
+                        if (/,\s*$/.test(text)) a.push('');
+                        return a;
+                    };
+
                     function readSingleFile(evt) {
                         var f = evt.target.files[0];
 
@@ -116,15 +140,18 @@
                             var r = new FileReader();
                             r.onload = function (e) {
                                 var csv = e.target.result;
-                                // console.log(csv);
+
+                                // csv = csv.match(/\w+|"(?:\\"|[^"])+"/g);
+                                // console.log(csv)
                                 // var row = contents.split("\r\n");
                                 var lines = csv.split("\r\n");
                                 var headers = lines[2].split(",");
 
                                 for (var i = 4; i < lines.length; i++) {
+                                    // console.log(CSVtoArray(lines[i - 1]));
 
                                     var obj = {};
-                                    var currentline = lines[i - 1].split(",");
+                                    var currentline = CSVtoArray(lines[i - 1]);
 
                                     for (var j = 0; j < headers.length; j++) {
                                         obj[headers[j]] = currentline[j];
@@ -146,7 +173,6 @@
                                 // CREATE DYNAMIC TABLE.
                                 var table = document.createElement("table");
                                 table.setAttribute("class", "table table-bordered table-responsive-md table-striped text-center");
-                                table.setAttribute("id", "importtable")
                                 // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
                                 var tr = table.insertRow(-1);                   // TABLE ROW.
@@ -175,22 +201,24 @@
                                 var divContainer = document.getElementById("formdataTable");
                                 divContainer.innerHTML = "";
                                 divContainer.appendChild(table);
-
-                                $('#importtable').DataTable();
-
                                 $("#Sub-btn").show();
+                                $("#cancelplan").show();
 
+                                $('#cancelplan').click(function () {
+                                    divContainer.innerHTML = "";
+                                    setTimeout("location.reload(true);", 100);
+                                })
 
                                 var $TABLE = $('#formdataTable');
                                 var $BTN = $('#Sub-btn');
-                                var $EXPORT = $('#export');
+                                // var $EXPORT = $('#export');
 
                                 jQuery.fn.pop = [].pop;
                                 jQuery.fn.shift = [].shift;
 
-                                var title = $("#ProjectTitle").val();
-                                var SiteId = $("#SiteId").val();
-                                var Report = $("#SiteReport").val();
+                                var Plan = $("#ProjectTitle").val();
+                                var Start = $("#SiteId").val();
+                                var Expire = $("#SiteReport").val();
                                 $BTN.click(function () {
                                     var $rows = $TABLE.find('tr:not(:hidden)');
                                     var headers = [];
@@ -215,19 +243,22 @@
                                     });
 
                                     // Output the result
-                                    $EXPORT.text(JSON.stringify(data));
+                                    // $EXPORT.text(JSON.stringify(data));
                                     var fair = JSON.stringify(data);
                                     console.log(fair);
                                     firebase.database().ref('PMplan').push({
                                         JSON: fair,
-                                        "Title": title,
-                                        "SiteId": SiteId,
-                                        "Report": Report
+                                        "Plan": Plan,
+                                        "Start": Start,
+                                        "Expire": Expire
                                     })
                                     divContainer.innerHTML = "";
-                                    $('#ProjectTitle').val('');
-                                    $('#SiteId').val('');
-                                    $('#SiteReport').val('');
+                                    // $('#ProjectTitle').val('');
+                                    // $('#SiteId').val('');
+                                    // $('#SiteReport').val('');
+                                    // $("#Sub-btn").hide();
+                                    // $("#cancelplan").hide();
+                                    setTimeout("location.reload(true);", 3000);
 
                                 });
 
@@ -258,6 +289,8 @@
                         window.open(url);
                     }
                 </script>
+
+<!-- 
 
                 <!-- /.container-fluid -->
 

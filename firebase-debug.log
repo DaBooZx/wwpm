@@ -1,36 +1,20 @@
-[debug] [2018-09-12T08:14:34.572Z] ----------------------------------------------------------------------
-[debug] [2018-09-12T08:14:34.578Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Support\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] [2018-09-12T08:14:34.579Z] CLI Version:   4.2.1
-[debug] [2018-09-12T08:14:34.579Z] Platform:      win32
-[debug] [2018-09-12T08:14:34.580Z] Node Version:  v10.9.0
-[debug] [2018-09-12T08:14:34.590Z] Time:          Wed Sep 12 2018 15:14:34 GMT+0700 (Indochina Time)
-[debug] [2018-09-12T08:14:34.590Z] ----------------------------------------------------------------------
+[debug] [2018-09-18T05:20:15.654Z] ----------------------------------------------------------------------
+[debug] [2018-09-18T05:20:15.657Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Support\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-09-18T05:20:15.658Z] CLI Version:   4.2.1
+[debug] [2018-09-18T05:20:15.658Z] Platform:      win32
+[debug] [2018-09-18T05:20:15.658Z] Node Version:  v10.10.0
+[debug] [2018-09-18T05:20:15.659Z] Time:          Tue Sep 18 2018 12:20:15 GMT+0700 (Indochina Time)
+[debug] [2018-09-18T05:20:15.659Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2018-09-12T08:14:34.631Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2018-09-12T08:14:34.633Z] > authorizing via signed-in user
-[debug] [2018-09-12T08:14:34.639Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2018-09-12T08:14:34.639Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+[debug] [2018-09-18T05:20:15.680Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-18T05:20:15.682Z] > authorizing via signed-in user
+[debug] [2018-09-18T05:20:15.685Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-18T05:20:15.685Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
 
-[debug] [2018-09-12T08:14:35.180Z] <<< HTTP RESPONSE 200
-[debug] [2018-09-12T08:14:35.205Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ww-pm-master  
+[debug] [2018-09-18T05:20:15.933Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-18T05:20:15.949Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/ww-pm-master  
  
-[debug] [2018-09-12T08:14:36.568Z] <<< HTTP RESPONSE 200
-[debug] [2018-09-12T08:14:36.577Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ww-pm-master  
+[debug] [2018-09-18T05:20:17.316Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-18T05:20:17.320Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/ww-pm-master  
  
-[debug] [2018-09-12T08:14:38.121Z] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\Users\Support\Desktop\Work\WW-PM-Master'...
-[info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2018-09-12T08:14:40.445Z] Fetching environment
-[debug] [2018-09-12T08:14:40.450Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/44764237218:getServerAppConfig  
- 
-[debug] [2018-09-12T08:14:40.451Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/44764237218/clients/_:getWebAppConfig  
- 
-[debug] [2018-09-12T08:14:41.191Z] <<< HTTP RESPONSE 200
-[debug] [2018-09-12T08:14:41.193Z] Starting @google-cloud/functions-emulator
-[debug] [2018-09-12T08:14:41.247Z] <<< HTTP RESPONSE 200
-[info] i  hosting[ww-pm-master]: Serving hosting files from: public
-[info] +  hosting[ww-pm-master]: Local server: http://localhost:5000
-[debug] [2018-09-12T08:14:44.938Z] Parsing function triggers
-[info] i  functions: No HTTPS functions found. Use firebase functions:shell if you would like to emulate other types of functions.
+[debug] [2018-09-18T05:20:18.686Z] <<< HTTP RESPONSE 200
